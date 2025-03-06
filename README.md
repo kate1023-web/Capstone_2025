@@ -29,7 +29,7 @@
 - 직관적인 UI/UX<br/>
 - 오프라인에서도 일정 관리 가능<br/>
 - MySQL과 연동하여 일정 데이터 저장 및 관리<br/>
-  
+  <br/>
 - 프론트엔드: HTML, CSS, JavaScript<br/>
 - 백엔드: Node.js (Express)<br/>
 - 데이터베이스: MySQL<br/>
