@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #333;
+    color: white;
+    padding: 10px 20px;
+}
+
+#menu-toggle {
+    cursor: pointer;
+    font-size: 24px;
+}
+
+#profile button {
+    background: #555;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+#sidebar {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background: #444;
+    color: white;
+    padding: 20px;
+    transition: 0.3s;
+}
+
+#sidebar p {
+    margin-top: 50px;
+}
+
+#close-btn {
+    cursor: pointer;
+    font-size: 20px;
+    text-align: right;
+}
+
+#date-container {
+    margin: 20px;
+}
+
+#calendar-btn {
+    cursor: pointer;
+}
+
+#date-picker {
+    display: none;
+}
+
+/* 달력 팝업 기본 숨김 */
+#calendar-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border: 1px solid #ddd;
+    padding: 15px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+/* 닫기 버튼 스타일 */
+#close-calendar {
+    margin-top: 10px;
+    background: #f00;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}

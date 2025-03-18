@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메인 페이지</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
+
+</head>
+<body>
+    <header>
+        <div role="button" id="menu-toggle">☰</div>
+        <div id="profile">
+            <button id="login-btn">로그인하기</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- 날짜 표시 및 버튼 -->
+        <div id="date-container">
+            <span id="current-date"></span>
+            <button id="calendar-btn">▼</button>
+        </div>
+
+        <!-- 팝업 달력 -->
+        <div id="calendar-popup">
+            <input type="date" id="date-picker">
+            <button id="close-calendar">닫기</button>
+        </div>
+
+        <!-- 카테고리별 투두리스트 -->
+        <div id="todo-container">
+            <h2>투두리스트</h2>
+            <ul id="todo-list">
+                <!-- MySQL 연동 후 데이터 표시 -->
+            </ul>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
