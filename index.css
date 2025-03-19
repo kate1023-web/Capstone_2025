@@ -1,5 +1,12 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Pretendard-Regular';
     margin: 0;
     padding: 0;
 }
@@ -26,18 +33,6 @@ header {
     cursor: pointer;
 }
 
-#sidebar {
-    position: fixed;
-    left: -250px;
-    top: 0;
-    width: 250px;
-    height: 100%;
-    background: #444;
-    color: white;
-    padding: 20px;
-    transition: 0.3s;
-}
-
 #sidebar p {
     margin-top: 50px;
 }
@@ -54,6 +49,10 @@ header {
 
 #calendar-btn {
     cursor: pointer;
+    background-color:transparent;
+    border: none;
+    outline: none;
+    font-size: 20px;
 }
 
 #date-picker {
@@ -77,9 +76,15 @@ header {
 /* 닫기 버튼 스타일 */
 #close-calendar {
     margin-top: 10px;
-    background: #f00;
+    background: #121212;
     color: white;
     border: none;
     padding: 5px 10px;
     cursor: pointer;
+}
+
+#current-date {
+    font-family: 'Pretendard-Regular';
+    font-weight: 800;
+    font-size: 50px;
 }
