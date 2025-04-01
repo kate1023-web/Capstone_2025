@@ -11,19 +11,57 @@ body {
     padding: 0;
 }
 
+/* 헤더 스타일 (고정) */
 header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 좌우 정렬 */
+    width: 100%;
+    background: #333;
+    color: white;
+    padding: 30px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+/* 헤더 내부 요소만 이동 */
+header .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #333;
-    color: white;
-    padding: 10px 20px;
+    width: 100%;
 }
 
-#menu-toggle {
+/* 사이드바 열릴 때 제목, 메뉴만 이동 (로그인 버튼은 고정) */
+.sidebar-open .header-content {
+    margin-left: 250px; /* 사이드바 너비만큼 이동 */
+    transition: margin-left 0.3s ease;
+}
+
+
+/* ☰ 버튼 (사이드바 내부/외부 공통) */
+.menu-toggle-btn {
     cursor: pointer;
     font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+    position: fixed;  /* 🔥 헤더에 고정 */
+    top: 10px;
+    left: 10px;
+    z-index: 1100;  /* 사이드바보다 위에 위치 */
 }
+
+/* 로그인 버튼을 고정된 위치에 유지 */
+#profile {
+    position: fixed;
+    right: 20px;
+    top: 15px;
+    z-index: 1200; /* 사이드바보다 위에 배치 */
+}
+
 
 #profile button {
     background: #555;
@@ -33,47 +71,41 @@ header {
     cursor: pointer;
 }
 
-#sidebar p {
-    margin-top: 50px;
-}
-
-#close-btn {
-    cursor: pointer;
-    font-size: 20px;
-    text-align: right;
-}
-
+/* 날짜 선택 버튼 */
 #date-container {
-    margin: 20px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 #calendar-btn {
     cursor: pointer;
-    background-color:transparent;
+    background-color: transparent;
     border: none;
     outline: none;
     font-size: 20px;
 }
 
-#date-picker {
-    display: none;
-}
-
-/* 달력 팝업 기본 숨김 */
 #calendar-popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 40px;
+    left: 10px;
     background: white;
-    border: 1px solid #ddd;
-    padding: 15px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 100;
 }
 
-/* 닫기 버튼 스타일 */
+#current-date {
+    font-family: 'Pretendard-Regular';
+    font-weight: 800;
+    font-size: 50px;
+}
+
+/* 닫기 버튼 */
 #close-calendar {
     margin-top: 10px;
     background: #121212;
@@ -83,8 +115,91 @@ header {
     cursor: pointer;
 }
 
-#current-date {
-    font-family: 'Pretendard-Regular';
-    font-weight: 800;
-    font-size: 50px;
+/* 사이드바 스타일 */
+#sidebar {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background: #333;
+    color: white;
+    padding: 20px;
+    transition: left 0.3s ease, opacity 0.3s ease;
+    visibility: hidden;
+    opacity: 0;
+}
+
+/* 사이드바 내부 요소 여백 추가 */
+#sidebar h2 {
+    margin-top: 60px; /* 제목을 아래로 내리기 */
+    text-align: center;
+}
+
+#sidebar ul {
+    margin-top: 40px; /* 리스트를 더 아래로 내리기 */
+}
+
+
+/* 사이드바 내부 닫기 버튼 */
+#menu-toggle-inside {
+    cursor: pointer;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+/* 사이드바 열렸을 때 */
+#sidebar.open {
+    left: 0;
+    visibility: visible;
+    opacity: 1;
+}
+
+/* 본문 이동 효과 */
+main {
+    transition: margin-left 0.3s ease;
+    padding: 80px 20px; /* 헤더와의 간격 확보 */
+}
+
+
+/* 🔥 사이드바가 열려도 ☰ 버튼 위치 유지 */
+body.sidebar-open .menu-toggle-btn {
+    left: 10px; /* 여전히 같은 위치 유지 */
+}
+
+body.sidebar-open {
+    overflow: hidden; /* 사이드바 열릴 때 스크롤 막음 */
+}
+
+/* 사이드바 리스트 스타일 */
+#sidebar ul {
+    list-style: none; /* 🔥 글머리 기호 제거 */
+    padding: 0;
+    margin-top: 20px; /* 🔥 리스트가 너무 위에 있으면 아래로 내림 */
+}
+
+/* 사이드바 리스트 항목 스타일 */
+#sidebar ul li {
+    margin-bottom: 15px; /* 🔥 항목 간격 조정 */
+}
+
+/* 사이드바 링크 스타일 */
+#sidebar ul li a {
+    text-decoration: none; /* 🔥 하이퍼링크 기본 밑줄 제거 */
+    color: #ddd; /* 🔥 글자 색상 변경 (연한 회색) */
+    font-size: 18px; /* 🔥 가독성 좋은 크기로 조정 */
+    display: block; /* 🔥 클릭 영역 확장 */
+    padding: 5px 10px; /* 🔥 클릭 시 여백 추가 */
+}
+
+/* 사이드바 링크 hover 효과 */
+#sidebar ul li a:hover {
+    color: #fff; /* 🔥 마우스 올렸을 때 색상 변경 */
+    background: rgba(255, 255, 255, 0.1); /* 🔥 살짝 배경 강조 */
+    border-radius: 5px;
 }
