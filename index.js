@@ -90,6 +90,32 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
     
+    document.addEventListener("DOMContentLoaded", function () {
+        const datePicker = document.getElementById("date-picker");
+        const memoText = document.getElementById("memo-text");
+        const saveMemoBtn = document.getElementById("save-memo");
+    
+        // 날짜별 메모 저장 (로컬 스토리지 사용)
+        function saveMemo() {
+            const selectedDate = datePicker.value; // 선택된 날짜
+            const memoContent = memoText.value; // 메모 내용
+            if (selectedDate) {
+                localStorage.setItem(`memo_${selectedDate}`, memoContent); // 저장
+                alert("메모가 저장되었습니다!");
+            } else {
+                alert("날짜를 선택하세요.");
+            }
+        }
+    
+        // 날짜 변경 시 메모 불러오기
+        datePicker.addEventListener("change", function () {
+            const selectedDate = datePicker.value;
+            const savedMemo = localStorage.getItem(`memo_${selectedDate}`) || "";
+            memoText.value = savedMemo; // 불러오기
+        });
+    
+        saveMemoBtn.addEventListener("click", saveMemo);
+    });
     
 
 });
