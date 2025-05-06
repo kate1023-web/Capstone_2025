@@ -1,0 +1,95 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema Capstone2025
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema Capstone2025
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `Capstone2025` DEFAULT CHARACTER SET utf8mb3 ;
+USE `Capstone2025` ;
+
+-- -----------------------------------------------------
+-- Table `Capstone2025`.`User`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Capstone2025`.`User` (
+  `user_id` VARCHAR(30) NOT NULL,
+  `user_pw` VARCHAR(512) NOT NULL,
+  `user_pk` INT NOT NULL AUTO_INCREMENT,
+  `user_name` VARCHAR(30) NULL DEFAULT NULL,
+  PRIMARY KEY (`user_pk`),
+  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC) VISIBLE,
+  UNIQUE INDEX `user_pw_UNIQUE` (`user_pw` ASC) VISIBLE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 24
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `Capstone2025`.`memo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Capstone2025`.`memo` (
+  `memo_date` VARCHAR(8) NOT NULL,
+  `memo_text` TEXT NULL DEFAULT NULL,
+  `memo_pk` INT NOT NULL AUTO_INCREMENT,
+  `user_pk` INT NOT NULL,
+  PRIMARY KEY (`memo_pk`),
+  UNIQUE INDEX `memo_date_UNIQUE` (`memo_date` ASC) VISIBLE,
+  INDEX `user_pk` (`user_pk` ASC) VISIBLE,
+  CONSTRAINT `memo_ibfk_1`
+    FOREIGN KEY (`user_pk`)
+    REFERENCES `Capstone2025`.`User` (`user_pk`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 41
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `Capstone2025`.`todo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Capstone2025`.`todo` (
+  `todo_cat` VARCHAR(512) NULL DEFAULT NULL,
+  `todo_date` VARCHAR(8) NOT NULL,
+  `user_pk` INT NOT NULL,
+  `todo_catpk` INT NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`todo_catpk`),
+  UNIQUE INDEX `todo_date_UNIQUE` (`todo_date` ASC) VISIBLE,
+  INDEX `user_pk` (`user_pk` ASC) VISIBLE,
+  CONSTRAINT `todo_ibfk_1`
+    FOREIGN KEY (`user_pk`)
+    REFERENCES `Capstone2025`.`User` (`user_pk`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 21
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `Capstone2025`.`todolist`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Capstone2025`.`todolist` (
+  `todo_list` TEXT NULL DEFAULT NULL,
+  `todo_pk` INT NOT NULL AUTO_INCREMENT,
+  `todo_catpk` INT NOT NULL,
+  `todo_tf` CHAR(1) NOT NULL,
+  `todo_catpk1` INT NOT NULL,
+  PRIMARY KEY (`todo_pk`),
+  INDEX `todo_catpk` (`todo_catpk` ASC) VISIBLE,
+  CONSTRAINT `todolist_ibfk_1`
+    FOREIGN KEY (`todo_catpk`)
+    REFERENCES `Capstone2025`.`todo` (`todo_catpk`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 21
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
