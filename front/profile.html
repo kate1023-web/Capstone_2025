@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>프로필</title>
+  <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+  <div class="profile-container">
+    <h2>👤 프로필 페이지</h2>
+
+    <div class="user-info">
+      <p><strong>이름 :</strong> <span id="profile-name"></span></p>
+      <p><strong>아이디 :</strong> <span id="profile-id"></span></p>
+    </div>
+
+    <hr>
+
+    <div class="update-section">
+      <h3>✏️ 이름 변경</h3>
+      <input type="text" id="new-name" placeholder="새 이름 입력">
+      <button id="change-name-btn">이름 변경</button>
+    </div>
+
+    <div class="update-section">
+      <h3>🔐 비밀번호 변경</h3>
+      <input type="password" id="current-pw" placeholder="현재 비밀번호">
+      <input type="password" id="new-pw" placeholder="새 비밀번호">
+      <input type="password" id="confirm-pw" placeholder="새 비밀번호 확인">
+      <button id="change-pw-btn">비밀번호 변경</button>
+    </div>
+
+    <div id="message" class="message"></div>
+
+    <div class="button-group">
+        <button id="logout-btn" class="logout-btn">🚪 로그아웃</button>
+        <button id="back-btn" class="back-btn">🏠 돌아가기</button>
+      </div>      
+  </div>
+
+  <script src="profile.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>템플릿</title>
+  <link rel="stylesheet" href="template.css" />
+  <script src="template.js" defer></script>
+</head>
+<body>
+  <!-- ☰ 버튼: 헤더 바깥에서 위치 고정 -->
+  <button role="button" id="menu-toggle" class="menu-toggle-btn">☰</button>
+
+  <header>
+    <div id="profile">
+      <span id="welcome-container" style="display: none;">
+        <a id="welcome-name" href="profile.html" style="color: #fbfeff; text-decoration: none;"></a>
+        님 반갑습니다! 🥰
+      </span>
+      <button id="login-btn">로그인하기</button>
+    </div>
+  </header>
+
+  <!-- ☰ 버튼을 사이드바 내부에도 추가 -->
+  <div id="sidebar">
+    <button role="button" id="menu-toggle-inside">☰</button>
+    <h2>메뉴</h2>
+    <ul>
+      <li><a href="index.html">HOME</a></li>
+      <li><a id="pdf-download-btn" href="#">PDF 추출</a></li>
+      <li><a id="sidebar-login" href="login.html">로그인</a></li>
+    </ul>
+  </div>
+
+  <main>
+    <div class="template-section">
+        <h2>카테고리 템플릿 페이지</h2>
+        <div id="template-container"></div>
+      </div>      
+  </main>
+
+  <main>
+    <div class="template-section">
+        <h2>차차 추가됩니다..</h2>
+      </div>      
+  </main>
+
+  <div id="pdf-overlay" style="display: none;"></div>
+  <div id="pdf-popup" style="display: none;">
+    <h3>PDF 추출</h3>
+    <input type="date" id="pdf-date-picker" />
+    <button id="download-pdf-btn">PDF 다운로드</button>
+    <button id="close-pdf-popup">닫기</button>
+  </div>
+</body>
+</html>

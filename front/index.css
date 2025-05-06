@@ -1,0 +1,798 @@
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Pretendard-Regular';
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+}
+
+/* 헤더 스타일 (고정) */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: #a2e8ff; /* 하늘 */
+  color: #333;
+  padding: 30px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+header .header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.sidebar-open .header-content {
+  margin-left: 250px;
+  transition: margin-left 0.3s ease;
+}
+
+.menu-toggle-btn {
+  cursor: pointer;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: #333;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1100;
+}
+
+#profile {
+  position: fixed;
+  right: 20px;
+  top: 15px;
+  z-index: 1200;
+}
+
+#profile button {
+  background: #b6edff; /* 조금 연한 하늘 */
+  color: #333;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+#profile button:hover {
+  background: #a2e8ff; /* 하늘 */
+}
+
+.calendar-wrapper {
+  position: relative;
+}
+
+.date-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* 왼쪽 정렬 */
+  margin-left: 20px;           /* 왼쪽 여백 */
+  gap: 10px;
+}
+
+#calendar-popup {
+  display: none;
+  position: absolute;
+  top: 110%;
+  left: 0;
+  background: white;
+  padding: 10px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  border-radius: 6px;
+  z-index: 999;
+  min-width: 180px;
+}
+
+#calendar-btn {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 20px;
+}
+
+#current-date {
+  font-family: 'Pretendard-Regular';
+  font-weight: 800;
+  font-size: 50px;
+}
+
+#close-calendar {
+  margin-top: 10px;
+  background: #b6edff; /* 조금 연한 하늘 */
+  color: #333;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+#close-calendar:hover {
+  background: #a2e8ff;
+}
+
+/* 사이드바 스타일 */
+#sidebar {
+  position: fixed;
+  left: -250px;
+  top: 0;
+  width: 250px;
+  height: 100%;
+  background: #a2e8ff; /* 하늘 */
+  color: #333;
+  padding: 20px;
+  transition: left 0.3s ease, opacity 0.3s ease;
+  visibility: hidden;
+  opacity: 0;
+}
+
+#sidebar h2 {
+  margin-top: 60px;
+  text-align: center;
+}
+
+#sidebar ul {
+  margin-top: 40px;
+}
+
+#menu-toggle-inside {
+  cursor: pointer;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: #333;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+body.sidebar-open #sidebar {
+  left: 0;
+  visibility: visible;
+  opacity: 1;
+}
+
+main {
+  transition: margin-left 0.3s ease;
+  padding: 80px 20px;
+}
+
+body.sidebar-open .menu-toggle-btn {
+  left: 10px;
+}
+
+body.sidebar-open {
+  overflow: hidden;
+}
+
+#sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+#sidebar ul li {
+  margin-bottom: 15px;
+}
+
+#sidebar ul li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 18px;
+  display: block;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+#sidebar ul li a:hover {
+  background: #cbf2ff; /* 연한 하늘 */
+}
+
+#memo-container {
+  position: fixed;
+  right: 20px;
+  top: 100px;
+  width: 300px;                     /* ✅ 원하는 폭으로 고정 */
+  max-width: 90vw;                  /* ✅ 화면 작을 때 자동 축소 */
+  height: auto;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;          /* ✅ padding 포함한 너비 계산 */
+}
+
+#memo-text {
+  width: 100%;
+  height: 280px;
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 14px;
+  background-color: #fbfeff;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.05);
+  resize: none;
+  box-sizing: border-box;
+}
+
+#save-memo {
+  margin-top: 10px;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 12px;
+  background-color: #cbf2ff;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#memo-message {
+  margin-top: 8px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  display: none;
+  color: #4caf50;
+}
+
+#memo-message.error {
+  color: #f44336;
+}
+
+
+#memo-text:focus {
+  outline: none;
+  border: 2px solid #a2e8ff;
+}
+
+#memo-message {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  color: #4caf50; /* 성공 메시지는 녹색 */
+  display: none;
+}
+
+#save-memo:hover {
+  background: #a2e8ff;
+}
+
+#memo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+#toggle-memo {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  transform: rotate(0deg);
+  transition: transform 0.3s ease;
+}
+
+#toggle-memo.collapsed {
+  transform: rotate(-90deg); /* ▼ → ▶ 아이콘 효과 */
+}
+
+.memo-collapsed #memo-text,
+.memo-collapsed #save-memo,
+.memo-collapsed #memo-message {
+display: none;
+}
+
+
+
+body.sidebar-open main {
+  margin-left: 300px;
+  transition: margin-left 0.3s ease;
+}
+
+#welcome-name:hover {
+  text-decoration: underline;
+  color: #a2e8ff;
+}
+
+/* 기존 CSS 유지 + 추가 스타일 */
+
+#overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.3);
+  display: none;
+  z-index: 900;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes popupFadeIn {
+  from {
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.popup-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.popup-inner h3 {
+  margin: 0;
+  color: #333;
+  text-align: center;
+}
+
+.popup-inner select,
+.popup-inner input {
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.popup-btns {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.popup-btns button {
+  flex: 1;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: #b6edff;
+}
+
+.popup-btns button:hover {
+  background-color: #a2e8ff;
+}
+
+/* ✅ 투두리스트 UI 개선 */
+#todo-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 1rem;
+}
+
+#todo-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+#add-todo-btn {
+  background: #b6edff;
+  color: #333;
+  font-size: 22px;
+  border: none;
+  border-radius: 8px;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#add-todo-btn:hover {
+  background: #a2e8ff;
+}
+
+#overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  display: none;
+  z-index: 900;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+#todo-form-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: auto;
+  background: #fbfeff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  display: none;
+  flex-direction: column;
+  z-index: 1001;
+  animation: popupFadeIn 0.3s ease-out forwards;
+}
+
+.popup-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.popup-inner h3 {
+  text-align: center;
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.popup-inner input {
+  padding: 0.6rem;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.popup-btns {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.popup-btns button {
+  flex: 1;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #b6edff;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.popup-btns button:hover {
+  background-color: #a2e8ff;
+}
+
+#category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.category-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.category-button {
+  background: #cbf2ff;
+  color: #333;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-size: 14px;
+}
+
+.category-button.selected {
+  background: #a2e8ff;
+  font-weight: bold;
+}
+
+.category-button:hover {
+  background: #b6edff;
+}
+
+#todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem;
+}
+
+#todo-list li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 0.5rem;
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+}
+
+.todo-delete {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.todo-delete:hover {
+  color: #e74c3c;
+}
+
+@keyframes popupFadeIn {
+  from {
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.remove-category {
+  background: none;
+  border: none;
+  color: #e74c3c;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 6px;
+}
+
+
+/* ▼ 토글 버튼 스타일 */
+#toggle-category-list {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+/* 카테고리 영역: 펼쳐졌을 때 스크롤 표시 */
+.category-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* ✅ 카테고리 간 위아래 간격 증가 */
+  margin-top: 10px;
+  max-height: 140px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+/* 카테고리 항목 하나 */
+.category-selector > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px; /* ✅ 실제 간격 효과 */
+}
+
+/* 팝업 헤더 안의 카테고리 추가 버튼 */
+.popup-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 4px;
+}
+
+#add-category-btn {
+background: none;
+border: none;
+font-size: 18px;
+color: #333;
+cursor: pointer;
+padding: 2px 6px;
+border-radius: 6px;
+transition: background-color 0.2s;
+}
+
+#add-category-btn:hover {
+background-color: #cbf2ff;
+}
+
+/* 카테고리 라벨과 토글 버튼을 나란히 최소 간격으로 배치 */
+.category-toggle-line {
+display: flex;
+align-items: center;
+gap: 6px;
+margin-bottom: 4px;
+}
+
+.category-label {
+font-weight: bold;
+font-size: 14px;
+margin: 0;
+}
+
+.toggle-category-btn {
+background: none;
+border: none;
+font-size: 16px;
+color: #333;
+cursor: pointer;
+padding: 0;
+margin: 0;
+line-height: 1;
+}
+
+/* 카테고리 목록 항목 간격 */
+.category-selector > div {
+display: flex;
+align-items: center;
+gap: 8px;
+margin-top: 6px;
+}
+
+.todo-list {
+display: flex;
+flex-direction: column;
+gap: 8px;
+margin-top: 10px;
+}
+
+.todo-item {
+padding: 6px 10px;
+background-color: #f0f8ff;
+border-radius: 6px;
+display: flex;
+align-items: center;
+gap: 10px;
+font-size: 15px;
+font-weight: 500;
+color: #333;
+width: fit-content; /* 내용 크기만큼만 */
+max-width: 90%;
+}
+
+.todo-item span {
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+.star-check {
+appearance: none;
+width: 18px;
+height: 18px;
+margin: 0;
+background: url('data:image/svg+xml;utf8,<svg fill="gray" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L24 9.748l-6 5.847 1.417 8.268L12 18.896l-7.417 4.967L6 15.595 0 9.748l8.332-1.73z"/></svg>') no-repeat center center;
+background-size: contain;
+cursor: pointer;
+border: none;
+}
+
+.star-check:checked {
+background: url('data:image/svg+xml;utf8,<svg fill="%23f2b600" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L24 9.748l-6 5.847 1.417 8.268L12 18.896l-7.417 4.967L6 15.595 0 9.748l8.332-1.73z"/></svg>') no-repeat center center;
+}
+
+.todo-category-header {
+  font-weight: bold;
+  margin-top: 1rem;
+  margin-bottom: 0.4rem;
+  font-size: 1.2rem;               /* ✅ 크기 키움 */
+  color: #7cdeff;                  /* ✅ 파스텔톤 하늘색 예시 */
+  border-bottom: 1px dashed #7cdeff;
+  padding-bottom: 4px;
+  display: inline-block;
+  width: max-content;
+}
+
+/* PDF 팝업 전체 영역 */
+/* PDF 팝업 전체 영역 */
+#pdf-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fbfeff;  /* 연한 파란톤 */
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  z-index: 1001;
+  width: 300px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 팝업 제목 */
+#pdf-popup h3 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* 날짜 선택 */
+#pdf-date-picker {
+  margin-bottom: 15px;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 14px;
+  background: white;
+}
+
+/* 버튼 공통 스타일 */
+#pdf-popup button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.2s;
+  font-weight: bold;
+}
+
+/* 다운로드 버튼 */
+#download-pdf-btn {
+  background-color: #b6edff;  /* 연한 하늘색 */
+  color: #333;
+}
+
+#download-pdf-btn:hover {
+  background-color: #a2e8ff;  /* 조금 더 진한 하늘색 */
+}
+
+/* 닫기 버튼 */
+#close-pdf-popup {
+  background-color: #e6f7fb;
+  color: #555;
+}
+
+#close-pdf-popup:hover {
+  background-color: #d1f0fa;
+}
+
+/* 흐림 처리된 배경 오버레이 */
+#pdf-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(2px);
+  z-index: 1000;
+}

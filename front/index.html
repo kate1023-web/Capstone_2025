@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메인 페이지</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js" defer></script> <!-- defer 속성 추가 -->
+</head>
+<body>
+    <!-- ☰ 버튼: 헤더 바깥에서 위치 고정 -->
+    <button role="button" id="menu-toggle" class="menu-toggle-btn">☰</button>
+
+    <header>
+        <div id="profile">
+            <span id="welcome-container" style="display: none;">
+                <a id="welcome-name" href="profile.html" style="color: #fbfeff; text-decoration: none;"></a>
+                님 반갑습니다! 🥰
+            </span>
+            <button id="login-btn" onclick="location.href = 'login.html'">로그인하기</button>
+        </div>
+    </header>
+
+    <!-- ☰ 버튼을 사이드바 내부에도 추가 -->
+    <div id="sidebar">
+        <button role="button" id="menu-toggle-inside">☰</button>
+        <h2>메뉴</h2>
+        <ul>
+            <li><a href="template.html">템플릿</a></li>
+            <li><a id="pdf-download-btn" href="#">PDF 추출</a></li>
+            <li><a id="sidebar-login" href="login.html">로그인</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <div class="date-container">
+            <span id="current-date"></span>
+            <div class="calendar-wrapper">
+                <button id="calendar-btn">▼</button>
+                <div id="calendar-popup" style="display: none;">
+                    <input type="date" id="date-picker">
+                    <button id="close-calendar">닫기</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="todo-header">
+            <h2>투두리스트</h2>
+            <button id="add-todo-btn">＋</button>
+        </div>
+
+        <div id="todo-list" class="todo-list"></div>
+    </main>
+
+    <div id="overlay"></div>
+    <div id="todo-form-popup">
+        <div class="popup-inner">
+            <div class="popup-header">
+                <h3>할 일 추가</h3>
+                <button id="add-category-btn" class="mini-plus">＋</button>
+            </div>
+            <div class="category-toggle-line">
+                <span class="category-label">카테고리</span>
+                <button id="toggle-category-list" class="toggle-category-btn">▼</button>
+            </div>
+            <div id="category-selector" class="category-selector" style="display: none;"></div>
+            <input type="text" id="todo-input" placeholder="할 일을 입력하세요" />
+            <div class="popup-btns">
+                <button id="submit-todo">추가</button>
+                <button id="close-todo-form">취소</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+    <!-- PDF 추출 팝업 -->
+    <div id="pdf-overlay" style="display: none;"></div>
+    <div id="pdf-popup" style="display: none;">
+        <h3>PDF 추출</h3>
+        <input type="date" id="pdf-date-picker">
+        <button id="download-pdf-btn">PDF 다운로드</button>
+        <button id="close-pdf-popup">닫기</button>
+    </div>
+
+    <!-- 메모장 컨테이너 추가 -->
+    <div id="memo-container">
+        <div id="memo-header">
+            <h2>메모장</h2>
+            <button id="toggle-memo" aria-label="메모창 열고닫기">▼</button>
+        </div>
+        <textarea id="memo-text" placeholder="메모를 입력하세요..."></textarea>
+        <button id="save-memo">저장</button>
+        <div id="memo-message"></div> <!-- ✅ 저장 상태 메시지 표시 영역 -->
+    </div>
+
+</body>
+</html>
